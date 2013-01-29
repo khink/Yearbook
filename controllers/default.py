@@ -23,7 +23,8 @@ def index():
 
 @auth.requires_login()
 def profile():
-    return dict(message=T('Hello ' + auth.user.first_name))
+    rows = db(db.basic_information.userid == auth.user_id).select()
+    return dict(message=T('Hello ' + auth.user.first_name + " " + str(len(rows))))
 
 def editProfile():
     return dict(message=T('Hello ' + auth.user.first_name))
