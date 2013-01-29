@@ -2,4 +2,5 @@
 *.swp
 *.log
 *.table
-error/*
+errors/*
+*.bak
