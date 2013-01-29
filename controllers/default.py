@@ -25,6 +25,9 @@ def index():
 def profile():
     return dict(message=T('Hello ' + auth.user.first_name))
 
+def editProfile():
+    return dict(message=T('Hello ' + auth.user.first_name))
+
 
 def user():
     """
