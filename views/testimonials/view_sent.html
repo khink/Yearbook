@@ -1,0 +1,34 @@
+{{extend 'layout.html'}}
+<h1> Testimonials by you </h1>
+	<table>
+	{{
+	i = 0
+	for t in testimonials:
+        if i % 2 == 0:
+	}}
+	<tr>
+    {{pass}}         
+        <td>
+			<div class="bs-docs-example">
+        	<div class="head">{{=t['name']}}</div>  
+            {{if not t['approved']:}}<div class="head-right"><a href={{=t['url']}}><i class="icon-pencil"></i></a></div>{{pass}}
+	        	<div class="entry">
+        			{{=t['content']}}
+        		</div>
+        		
+        		<div class="small"> Posted on {{=t['time']}} </div> 
+        		<div class="tail">[{{if t['approved']:}} Approved {{else:}}Awaiting approval {{pass}}] </div>
+			</div>
+        </td>
+    {{
+        if i % 2:
+    }}
+    </tr>
+    {{pass}}
+    {{i += 1}}
+	
+	{{pass}}
+    {{ if i % 2:}}
+		</tr>
+	{{pass}}
+	</table>

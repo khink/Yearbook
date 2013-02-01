@@ -1,0 +1,39 @@
+{{extend 'layout.html'}}
+<!--{{=BEAUTIFY(response._vars)}}-->
+{{if state != 3:}}
+	{{if state == 1:}}
+	<h2> Pick the department of the student </h2>	
+	{{else:}}
+	<h2> Pick the student </h2>
+	{{pass}}
+    <br />
+	<table>
+    {{i = 0}}
+    {{for d in table:}}
+        {{if state == 1 or i % 6==0:}}
+		<tr>
+        {{pass}}
+            <td>
+            	<a href={{=d['url']}}>{{=d['name']}}</a> 
+        	</td>			
+        {{
+        i += 1
+        if state == 1 or i % 6 == 0:        
+		}}
+        </tr>
+        {{pass}}
+	{{pass}}
+	</table>
+{{else:}}
+	{{if testimonialExists:}}
+		<div class="bs-docs-example">  
+			<div class="head">{{=table['auth_user']['first_name'] + " " +table['auth_user']['last_name']}}</div>   
+            {{if not table['testimonials']['approved']:}}<div class="head-right"><a href={{=table['url']}}><i class="icon-pencil"></i></a></div>{{pass}}          
+            <div class="entry">
+            	{{=table['testimonials']['testimonial']}}
+            </div>
+            <div class="tail"> {{if table['testimonials']['approved']:}} Approved {{else:}} Awaiting approval {{pass}} </div>
+        </div>
+	{{else:}}
+	{{pass}}
+{{pass}}
