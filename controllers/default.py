@@ -19,15 +19,48 @@ def index():
     return auth.wiki()
     """
     #response.flash = T("Welcome to web2py!")
-    redirect('profile')
+    redirect(URL('default','profile'))
 
 @auth.requires_login()
-def profile():
+def profile():                
     rows = db(db.basic_information.userid == auth.user_id).select()
-    return dict(message=T('Hello ' + auth.user.first_name + " " + str(len(rows))))
+    record_id = None
+    action = 'editProfile'
+    if len(rows) == 1:
+        record_id = rows[0].id        
+    retVal = dict()
+    retVal['name'] = auth.user.first_name + " " + auth.user.last_name
+    form1 = SQLFORM(db.basic_information, record_id,                     
+               fields = ['email', 'nicknames', 'favourite_quotation'], 
+               labels = {'name':'Full Name', 'nicknames':'Nicknames', 'email':'Alternate Email'},
+               col3 = {'nicknames':'What do friends call you?'}, submit_button = 'Submit',                                                
+               comments = False, keepopts = [], showid = False,
+               ignore_rw = True, record_id = None,                        
+               buttons = ['submit'], separator = ': ', _method = 'POST', 
+               _action = action)
+    if form1.process().accepted:
+       response.flash = 'Form Accepted'
+    elif form1.errors:
+       response.flash = 'Form has Errors'                               
+    
+    retVal['form1'] = form1        
+    return retVal
 
 def editProfile():
-    return dict(message=T('Hello ' + auth.user.first_name))
+    requestVars = request.post_vars
+    if 'email' in requestVars and 'nicknames' in requestVars and 'favourite_quotation' in requestVars:
+        rows = db(db.basic_information.userid == auth.user_id).select()        
+        if len(rows) == 1:
+            record_id = rows[0].id 
+            db(db.basic_information.id == record_id).update(email=requestVars['email'], nicknames = requestVars['nicknames'],
+                                                   favourite_quotation = requestVars['favourite_quotation'])
+        elif len(rows) == 0:
+            db.basic_information.insert(userid = auth.user_id, email = requestVars['email'],
+                                        nicknames = requestVars['nicknames'], 
+                                        favourite_quotation = requestVars['favourite_quotation']
+                                    )
+                                    
+    redirect(URL('default','profile'))
 
 
 def user():
