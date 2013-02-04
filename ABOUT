@@ -1,2 +1,1 @@
-Write something about this app.
-Developed with web2py.
+This is an application aimed at collecting data for the Yearbook created for the passing out batch of the institute. The application allows the user to add details about him by answering questions (such as : 'Favourite quotation', 'Where do you see yourself in 5 years?') and let's users post some remark (called 'testimonial' here) about another user. These details are then reflected in the printed yearbook.
