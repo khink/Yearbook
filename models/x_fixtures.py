@@ -1,4 +1,6 @@
 # Values for Deparment table
+import os 
+
 depts = dict(
         bt  = 'Biotechnology',
         cle = 'Chemical Engineering',
@@ -18,8 +20,7 @@ if db(db.departments.id > 0).count() == 0:
     db.departments.insert (short=dept, name=depts[dept])
 
 if db(db.auth_user.id > 0).count() == 0:
-  # Insert users
-    import os
+  # Insert users    
     moduledir = os.path.dirname(os.path.abspath('__file__'))
     try:
         for dept in depts:           
@@ -30,10 +31,10 @@ if db(db.auth_user.id > 0).count() == 0:
                 #raise Exception (user)
                 userId = db.auth_user.insert(                
                             password = db.auth_user.password.validate(user[2])[0],
-                            email = user[1],
+                            email = user[1] + "@iitg.ac.in",
                             first_name = user[0].split()[0],
                             last_name = user[0].split()[-1],                
                          )
-                db.department_student.insert (userid = userId, deptid = deptId)
+                db.department_student.insert (userid = userId, deptid = deptId, btech = (int(user[3]) == 1))
     except Exception as e:
         raise e

@@ -20,6 +20,7 @@ db.define_table('departments',
 db.define_table('department_student',
     Field('userid', db.auth_user, required = True),
     Field('deptid', db.departments, required = True),
+    Field('btech', 'boolean'),
     format = '%(name)s')
 # basic_information table
 db.define_table('basic_information',

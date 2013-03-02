@@ -138,11 +138,16 @@ def post():
         rows = db(db.department_student.deptid == int(vars['dept'])).select(
                     join=db.auth_user.on( (db.department_student.userid == db.auth_user.id) & (db.auth_user.id != auth.user_id)) )        
         #join=db.thing.on(db.person.id==db.thing.owner))
-        table = []
+        tableBtech = []
+        tableMtech = []
         for row in rows:
+            if row['department_student.btech']:
+                table = tableBtech
+            else:
+                table = tableMtech
             table.append(dict(name = row['auth_user.first_name'] + " " + row['auth_user.last_name'], 
                               url  = URL('testimonials', 'post', vars=dict(student=row['auth_user.id']))))            
-        return dict(state = 2, table=table)            
+        return dict(state = 2, tableBtech=tableBtech, tableMtech = tableMtech)            
     else:
         # Give a list of departments
         rows = db(db.departments).select()        
