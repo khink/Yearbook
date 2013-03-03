@@ -37,7 +37,8 @@ def profile():
                              'wanted_to_do':'One thing that you wanted to but couldn\'t do at IITG (<200 chars)',
                              'people_dont_know':'One thing people don\'t know about you (<200 chars)', 'what_next':'What next?(<200 chars)', 
                              'after_15_years' : 'Where do you see yourself in 15 years?(<200 chars)', 
-                             'claim_to_fame':'Your claim to fame at IITG(<200 chas)', 'song_describes_you':'One song title that describes your life'
+                             'claim_to_fame':'Your claim to fame at IITG(<200 chas)', 'song_describes_you':'One song title that describes your life',
+                             'facebook' : 'Facebook profile link', 'linkedin' : 'LinkedIn profile link'
                             }
                    )    
     
@@ -77,6 +78,8 @@ def viewProfile():
         data.append(('What next?', profile[0]['what_next']))
         data.append(('After 15 years', profile[0]['after_15_years']))
         data.append(('Song', profile[0]['song_describes_you']))
+        data.append(('Facebook profile', profile[0]['facebook']))
+        data.append(('LinkedIn profile', profile[0]['linkedin']))
                     
     return dict(exists = profileExists, data = data)
     
