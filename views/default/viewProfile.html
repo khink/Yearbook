@@ -1,0 +1,16 @@
+{{extend 'layout.html'}}
+
+<!--{{=BEAUTIFY(response._vars)}}-->
+{{if exists:}}
+<h1> Profile information </h1>
+	<table>
+	{{for d in data:}}
+        <tr>
+            <td>{{=d[0]}}</td>
+            <td>{{=d[1]}}</td>
+        </tr>
+	{{pass}}
+	</table>
+{{else:}}
+<h1> Profile not created yet. <1h1>
+{{pass}}
