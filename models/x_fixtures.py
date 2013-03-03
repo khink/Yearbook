@@ -46,12 +46,17 @@ if db(db.auth_user.id > 0).count() == 0:
         deptId   = db(db.departments.short == dept).select().first()['id']
         for user in userInfo:
             user = user.strip().split(',')
+            first_name = user[0].split()[0]
+            last_name  = user[0].split()[-1]
+            
+            first_name = first_name[0].upper() + first_name[1:].lower()
+            last_name  = last_name[0].upper() + last_name[1:].lower()
             #raise Exception (user)
             userId = db.auth_user.insert(
                         password = db.auth_user.password.validate(user[2])[0],
                         email = user[1] + "@iitg.ac.in",
-                        first_name = user[0].split()[0],
-                        last_name = user[0].split()[-1],
+                        first_name = first_name,
+                        last_name = last_name,
                      )
             db.department_student.insert (userid = userId, deptid = deptId, btech = (int(user[3]) == 1))
             if user[1] + "\n" in dReps:
