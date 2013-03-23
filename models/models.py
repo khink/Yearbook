@@ -4,7 +4,7 @@
 db.define_table('testimonials',
     Field('author', db.auth_user, required = True, notnull = True),
     Field('receiver', db.auth_user, required = True, notnull = True),
-    Field('testimonial', 'text', length = 250, required = True, notnull = True),
+    Field('testimonial', 'text', length = 500, required = True, notnull = True),
     Field('approved', 'boolean', required = True, default = 'false'),
     Field('created_on', 'datetime', required = True, default = request.now),
     format = '%(name)s')
