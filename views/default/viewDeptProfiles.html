@@ -1,0 +1,21 @@
+{{extend 'layout.html'}}
+<!--{{=BEAUTIFY(response._vars)}}-->
+<table>
+	<tr>
+        <th>Name</th>
+        <th>Profile filled?</th>
+        <th>Testimonial(s) received</th>
+    </tr>
+	{{for s in studentsList:}}
+	<tr>
+	    <td>{{=s[1]}}</td>
+        <td>{{if s[2]:}}
+            <a href = {{=URL('default', 'viewProfile', args=[str(s[0])])}}> Yes </a>
+            {{else:}}
+            No
+            {{pass}}
+        </td>
+        <td>{{=s[3]}}</td>
+    </tr>
+	{{pass}}
+</table>

@@ -28,9 +28,3 @@ Database related information
 
 * Currently, this application makes use of SQLite. 
 * To modify that look into `models/db.py`.
-
-
-Fixes / Improvements required
-----------------------------
-
-* The following forms use a separate handler 

@@ -61,7 +61,8 @@ def view():
 def edit():
     receiver = int(request.args[0])
     rows = db((db.testimonials.receiver == receiver) & (db.testimonials.author == auth.user_id)).select()
-    
+    receiverDetails = db(db.auth_user.id == receiver).select().first()
+    receiverName = receiverDetails['first_name'] + " " + receiverDetails['last_name']
     form1 = None
     if len(rows) == 1:
         record_id = int(rows[0]['id'])
@@ -81,7 +82,7 @@ def edit():
                ignore_rw = True, buttons = ['submit'], separator = ': ', _method = 'POST',
                _action = URL('testimonials', 'editSubmit', args=[receiver]))
     
-    return dict(form=form1)       
+    return dict(form=form1, receiver = receiverName)       
     
 @auth.requires_login()
 def editSubmit():
@@ -138,11 +139,16 @@ def post():
         rows = db(db.department_student.deptid == int(vars['dept'])).select(
                     join=db.auth_user.on( (db.department_student.userid == db.auth_user.id) & (db.auth_user.id != auth.user_id)) )        
         #join=db.thing.on(db.person.id==db.thing.owner))
-        table = []
+        tableBtech = []
+        tableMtech = []
         for row in rows:
+            if row['department_student.btech']:
+                table = tableBtech
+            else:
+                table = tableMtech
             table.append(dict(name = row['auth_user.first_name'] + " " + row['auth_user.last_name'], 
                               url  = URL('testimonials', 'post', vars=dict(student=row['auth_user.id']))))            
-        return dict(state = 2, table=table)            
+        return dict(state = 2, tableBtech=tableBtech, tableMtech = tableMtech)            
     else:
         # Give a list of departments
         rows = db(db.departments).select()        
