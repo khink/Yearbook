@@ -12,7 +12,8 @@ depts = dict(
         eee = 'Electronics and Electrical Engineering',
         mnc = 'Mathematics and Computing',
         me  = 'Mechanical Engineering',
-        phy = 'Phyics'
+        phy = 'Phyics',
+        hss = "HSS"
         )
 
 hostels = ['Barak', 'Brahmaputra', 'Dibang', 'Dihing', 'Kameng', 'Kapili', 'Manas', 'Siang', 'Subansiri', 'Umiam']
