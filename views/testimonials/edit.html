@@ -6,9 +6,10 @@
     	counter.id = 'counter';
     	textLength = $("#testimonials_testimonial").text().length;
         counter.textContent = "[Characters left : " + (allowedChars - textLength) + "]";  
-    	$("#testimonials_testimonial__label")[0].insertBefore(counter);  		
+    	$("#testimonials_testimonial__label")[0].insertBefore(counter, null);  		
     	$("#testimonials_testimonial").keyup(function(){$("#counter").text("[Characters left : " + (250 - $(this).val().length) + "]");});
     });
     
 </script>
+<h3> {{=receiver}} </h3>
 {{=form}}

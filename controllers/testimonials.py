@@ -61,7 +61,8 @@ def view():
 def edit():
     receiver = int(request.args[0])
     rows = db((db.testimonials.receiver == receiver) & (db.testimonials.author == auth.user_id)).select()
-    
+    receiverDetails = db(db.auth_user.id == receiver).select().first()
+    receiverName = receiverDetails['first_name'] + " " + receiverDetails['last_name']
     form1 = None
     if len(rows) == 1:
         record_id = int(rows[0]['id'])
@@ -81,7 +82,7 @@ def edit():
                ignore_rw = True, buttons = ['submit'], separator = ': ', _method = 'POST',
                _action = URL('testimonials', 'editSubmit', args=[receiver]))
     
-    return dict(form=form1)       
+    return dict(form=form1, receiver = receiverName)       
     
 @auth.requires_login()
 def editSubmit():
