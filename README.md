@@ -26,5 +26,27 @@ Installation instructions
 Database related information
 -----------------------------
 
-* Currently, this application makes use of SQLite. 
+* Currently, this application makes use of SQLite.
 * To modify that look into `models/db.py`.
+
+
+HHC Branch
+----------
+
+A branch for customer modifications.
+
+This branch targets the following:
+* Modify departments structure
+* Modify personal data on profile, notably:
+  - Display 2 photos (students need not be able to change these)
+    Photos should not be on a publicly accessible URL.
+* Allow adding testimonials for teachers/professors
+* Disable or modify workflow (approval mechanism)
+* Add an overview page for the book layouters
+
+Then there's some small stuff, like
+* Dutch translation
+* Modify templates
+
+We should also prevent login by brute force, but that should probably happen in
+web2py.
