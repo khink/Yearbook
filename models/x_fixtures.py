@@ -27,7 +27,7 @@ if db(db.departments.id > 0).count() == 0:
     db.departments.insert (short=dept, name=depts[dept])
 
 moduledir = os.path.dirname(os.path.abspath('__file__'))
-dbFiles = os.path.join(moduledir, 'applications', 'yearbook2013', 'models', 'students')
+dbFiles = os.path.join(request.folder, 'models', 'students')
 
 drepGid = 0
 grepGid = 0
@@ -49,7 +49,7 @@ if db(db.auth_user.id > 0).count() == 0:
             user = user.strip().split(',')
             first_name = user[0].split()[0]
             last_name  = user[0].split()[-1]
-            
+
             first_name = first_name[0].upper() + first_name[1:].lower()
             last_name  = last_name[0].upper() + last_name[1:].lower()
             #raise Exception (user)
